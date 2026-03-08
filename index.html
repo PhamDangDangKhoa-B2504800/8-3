@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gửi Ngọc Mai - 8/3</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden;
+            background: #000;
+        }
+
+        .side {
+            display: none;
+            height: 100vh;
+            width: 100vw;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            text-align: center;
+            transition: all 0.5s ease;
+        }
+
+        .active { display: flex; }
+
+        /* SIDE 1: Công nghệ */
+        #side1 {
+            background: radial-gradient(circle, #1a1a2e, #16213e, #0f3460);
+        }
+        .tech-box {
+            padding: 40px;
+            border: 2px solid #00fff2;
+            box-shadow: 0 0 20px #00fff2, inset 0 0 10px #00fff2;
+            border-radius: 15px;
+            background: rgba(0, 0, 0, 0.6);
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        .tech-box:hover { transform: scale(1.05); }
+        .tech-box h2 {
+            color: #00fff2;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            margin: 0;
+            font-size: 2em;
+            text-shadow: 0 0 10px #00fff2;
+        }
+
+        /* SIDE 2: Băng giá */
+        #side2 {
+            background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%);
+        }
+        .glass-box {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px); /* Hiệu ứng Glassmorphism [1] */
+            border-radius: 20px;
+            padding: 50px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+        .glass-box h2 { color: #1a5f7a; margin-bottom: 20px; }
+        input {
+            padding: 12px 20px;
+            border-radius: 25px;
+            border: none;
+            outline: none;
+            width: 250px;
+            font-size: 16px;
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.1);
+        }
+        button {
+            margin-top: 15px;
+            padding: 10px 30px;
+            background: #1a5f7a;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        /* SIDE 3: Tình yêu chính thức */
+        #side3 {
+            background: #fff0f3;
+            position: relative;
+        }
+        
+        /* Hiệu ứng trái tim đập [4] */
+        .heart-container {
+            position: relative;
+            width: 150px;
+            height: 150px;
+            animation: heartBeat 1.2s infinite;
+            margin-bottom: 30px;
+        }
+        .heart-main {
+            background-color: #ff4d6d;
+            height: 100px;
+            width: 100px;
+            position: absolute;
+            transform: rotate(-45deg);
+            top: 25px;
+            left: 25px;
+            box-shadow: 0 0 40px #ff4d6d;
+        }
+        .heart-main::before, .heart-main::after {
+            content: "";
+            background-color: #ff4d6d;
+            border-radius: 50%;
+            height: 100px;
+            width: 100px;
+            position: absolute;
+        }
+        .heart-main::before { top: -50px; left: 0; }
+        .heart-main::after { left: 50px; top: 0; }
+
+        @keyframes heartBeat {
+            0% { transform: scale(1); }
+            14% { transform: scale(1.1); }
+            28% { transform: scale(1); }
+            42% { transform: scale(1.1); }
+            70% { transform: scale(1); }
+        }
+
+        /* Trang trí Caption [2] */
+        .caption-container {
+            max-width: 600px;
+            padding: 30px;
+            border: 4px double #ff758f;
+            border-radius: 30px;
+            background: white;
+            position: relative;
+            z-index: 10;
+        }
+        .caption-text {
+            font-size: 1.2em;
+            line-height: 1.6;
+            background: linear-gradient(to right, #ff4d6d, #c9184a, #ff758f); /* Gradient Text [2] */
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: bold;
+        }
+
+        /* Trái tim quay xung quanh [6] */
+        .rotating-hearts {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+        .small-heart {
+            position: absolute;
+            color: #ff4d6d;
+            font-size: 20px;
+            animation: rotate 10s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg) translateX(350px) rotate(0deg); }
+            to { transform: rotate(360deg) translateX(350px) rotate(-360deg); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- SIDE 1 -->
+    <div id="side1" class="side active">
+        <div class="tech-box" onclick="goToSide(2)">
+            <h2>chuẩn bị chưaaa</h2>
+        </div>
+    </div>
+
+    <!-- SIDE 2 -->
+    <div id="side2" class="side">
+        <div class="glass-box">
+            <h2>Hãy nhập chìa khóa để tan chảy lớp băng...</h2>
+            <input type="password" id="password" placeholder="Mật khẩu là gì nhỉ?">
+            <br>
+            <button onclick="checkPassword()">Mở cửa trái tim</button>
+        </div>
+    </div>
+
+    <!-- SIDE 3 -->
+    <div id="side3" class="side">
+        <div class="rotating-hearts" id="rotating-container"></div>
+        <div class="heart-container">
+            <div class="heart-main"></div>
+        </div>
+        <div class="caption-container">
+            <div class="caption-text">
+                Phụ nữ giống như những đóa hoa, có loài kiêu sa, có loài dịu dàng. Nhưng Ngọc Mai lại khác, em là đóa hoa tinh khôi nằm sâu bên trong lớp băng lạnh giá mà vẫn nồng cháy như ánh ban "mai" mùa xuân rực rỡ. <br><br>
+                Chúc em ngày 8/3 luôn đủ nắng để nở rộ, đủ nước để tươi xanh và luôn là bông hoa rực rỡ nhất trong khu vườn của chính mình! 💖
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function goToSide(num) {
+            document.querySelectorAll('.side').forEach(s => s.classList.remove('active'));
+            document.getElementById('side' + num).classList.add('active');
+        }
+
+        function checkPassword() {
+            const pass = document.getElementById('password').value;
+            if (pass === "ngocmaibanggia") {
+                goToSide(3);
+                createRotatingHearts();
+            } else {
+                alert("Mật khẩu sai rồi, hãy thử lại nhé!");
+            }
+        }
+
+        function createRotatingHearts() {
+            const container = document.getElementById('rotating-container');
+            for (let i = 0; i < 15; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'small-heart';
+                heart.innerHTML = '❤️';
+                heart.style.left = '50%';
+                heart.style.top = '50%';
+                heart.style.animationDelay = (i * 0.7) + 's';
+                container.appendChild(heart);
+            }
+        }
+    </script>
+</body>
+</html>
